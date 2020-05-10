@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "description": "Un chat como telgram pero mio xd",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server"
+  },
+  "keywords": [
+    "backend",
+    "chat",
+    "server"
+  ],
+  "author": "Fadith Escorcia",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.12",
+    "multer": "^1.4.2",
+    "socket.io": "^2.3.0"
+  }
+}
