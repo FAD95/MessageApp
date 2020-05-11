@@ -1,46 +1,45 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
-import axios from "axios"
+import request from "../network/request"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = () => {
-  const [list, setList] = useState([])
-  let UsersList = []
+  const [userList, setUserList] = useState([])
+
   useEffect(() => {
+    let list = []
+    const getUsers = async () => {
+      await request("http://localhost:3000/user")
+        .then(res => {
+          list = res.data.body
+        })
+        .catch(e => {
+          console.error(e)
+        })
+    }
     getUsers().then(() => {
-      setList(UsersList.data.body)
+      setUserList(list)
     })
   }, [])
-  const reqUsers = () => {
-    try {
-      return axios.get("http://localhost:3000/user")
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  const getUsers = async () => {
-    await reqUsers()
-      .then(res => {
-        UsersList = res
-      })
-      .catch(e => {
-        console.error(e)
-      })
-  }
-
   return (
     <Layout>
       <SEO title="Home" />
 
       <h1>Hi people</h1>
-      {list.map(user => {
-        return <h1 key={user._id}>{user.name}</h1>
-      })}
-      <h2></h2>
+      <ul>
+        {userList.map(user => {
+          return (
+            <li key={user._id}>
+              <Link to={"/chat"} state={user}>
+                {user.name}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
 
       <p>Welcome to your new Gatsby site.</p>
       <p>Now go build something great.</p>

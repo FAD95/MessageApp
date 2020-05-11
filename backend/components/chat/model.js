@@ -9,6 +9,7 @@ const mySchema = new Schema({
       ref: 'User',
     },
   ],
+  name: String,
 })
 
 const model = mongoose.model('Chat', mySchema)

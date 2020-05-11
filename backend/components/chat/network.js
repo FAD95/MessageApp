@@ -16,7 +16,7 @@ router.get('/:userId', (req, res) => {
 
 router.post('/', (req, res) => {
   controller
-    .addChat(req.body.users)
+    .addChat(req.body.users, req.body.name)
     .then((data) => {
       response.success(req, res, data, 201)
     })
